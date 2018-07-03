@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="aspnet-MyProject-20180629095649" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-MyProject-20180629095649.mdf;Initial Catalog=aspnet-MyProject-20180629095649;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DefaultConnection" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.UserRoleView" Member="UserRoleView">
+    <Type Name="UserRoleView">
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserRoles" Member="AspNetUserRoles">
+    <Type Name="AspNetUserRoles">
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="AspNetUsers_AspNetUserRoles" Member="AspNetUsers" ThisKey="UserId" OtherKey="Id" Type="AspNetUsers" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="AspNetRoles_AspNetUserRoles" Member="AspNetRoles" ThisKey="RoleId" OtherKey="Id" Type="AspNetRoles" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUsers" Member="AspNetUsers">
+    <Type Name="AspNetUsers">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="EmailConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SecurityStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumberConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TwoFactorEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LockoutEndDateUtc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LockoutEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AccessFailedCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetUsers_AspNetUserRoles" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRoles" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetRoles" Member="AspNetRoles">
+    <Type Name="AspNetRoles">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetRoles_AspNetUserRoles" Member="AspNetUserRoles" ThisKey="Id" OtherKey="RoleId" Type="AspNetUserRoles" />
+      <Association Name="AspNetRoles_AspNetRoles" Member="AspNetRoles2" ThisKey="Id" OtherKey="Id" Type="AspNetRoles" Cardinality="One" />
+      <Association Name="AspNetRoles_AspNetRoles" Member="AspNetRoles1" ThisKey="Id" OtherKey="Id" Type="AspNetRoles" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.AddRole" Method="AddRole">
+    <Parameter Name="userId" Type="System.String" DbType="NVarChar(128)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.DelUser" Method="DelUser">
+    <Parameter Name="userId" Type="System.String" DbType="NVarChar(128)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateRole" Method="UpdateRole">
+    <Parameter Name="userId" Type="System.String" DbType="NVarChar(128)" />
+    <Parameter Name="roleId" Type="System.String" DbType="NVarChar(128)" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DataClasses">
+  <DataContextMoniker Name="/DataClassesDataContext" />
+  <nestedChildShapes>
+    <classShape Id="f309e8da-0b1b-4acd-a558-d6758a82e5f0" isExpanded="false" absoluteBounds="0.5, 0.5, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/UserRoleView" />
+      <nestedChildShapes>
+        <elementListCompartment Id="580ce503-0c36-42cc-8643-04665209b151" absoluteBounds="0.51499999999999968, 0.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f47ba6cd-0ef5-44d8-a1bf-821abb9dacc5" isExpanded="false" absoluteBounds="2.875, 1.125, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/AspNetUserRoles" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dc806394-06b9-4733-b947-1459e8b17499" absoluteBounds="2.89, 1.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0f5089fd-07a6-4a0a-b3bf-3ff6b796f91d" isExpanded="false" absoluteBounds="2.875, 1.75, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/AspNetUsers" />
+      <nestedChildShapes>
+        <elementListCompartment Id="adc9bd2f-cc44-48c1-ad87-c5fe3650a226" absoluteBounds="2.89, 2.21, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="998f1b92-3888-47af-a788-8c37fc43823f" isExpanded="false" absoluteBounds="2.875, 0.5, 2, 0.45">
+      <DataClassMoniker Name="/DataClassesDataContext/AspNetRoles" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2915ce62-eeef-4695-9428-2cc949100428" absoluteBounds="2.89, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.875 : 1.75); (3.875 : 1.575)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataClassesDataContext/AspNetUsers/AspNetUsers_AspNetUserRoles" />
+      <nodes>
+        <classShapeMoniker Id="0f5089fd-07a6-4a0a-b3bf-3ff6b796f91d" />
+        <classShapeMoniker Id="f47ba6cd-0ef5-44d8-a1bf-821abb9dacc5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.875 : 0.95); (3.875 : 1.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataClassesDataContext/AspNetRoles/AspNetRoles_AspNetUserRoles" />
+      <nodes>
+        <classShapeMoniker Id="998f1b92-3888-47af-a788-8c37fc43823f" />
+        <classShapeMoniker Id="f47ba6cd-0ef5-44d8-a1bf-821abb9dacc5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.55919230769231 : 0.5); (3.55919230769231 : 0.25); (4.20584615384615 : 0.25); (4.20584615384615 : 0.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DataClassesDataContext/AspNetRoles/AspNetRoles_AspNetRoles" />
+      <nodes>
+        <classShapeMoniker Id="998f1b92-3888-47af-a788-8c37fc43823f" />
+        <classShapeMoniker Id="998f1b92-3888-47af-a788-8c37fc43823f" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

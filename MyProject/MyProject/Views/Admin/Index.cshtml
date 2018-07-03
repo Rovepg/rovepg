@@ -1,0 +1,145 @@
+﻿@model MyProject.Models.AdminModel
+
+@{
+    ViewBag.Title = "Админка";
+    int i = 1;
+}
+
+<div style="margin-bottom:50px;margin-top:20px; font-size:20px; text-align:center">Список пользователей</div>
+<div>
+    <table>
+        <thead>
+            <tr style="border-bottom:2px solid black">
+                <th></th>
+                <th class="padding-table">Email</th>
+                <th class="padding-table">Role</th>
+                <th> Изменить роль</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.userList)
+            {
+                 
+                <tr style="border-bottom:1px solid black" data-userid="@item.UserId" class="string" data-myId="@Model.myId">
+                    <td class="padding-table">
+                        @i
+                    </td>
+                    <td class="padding-table">
+                        @item.Email
+                    </td>
+                    <td class="padding-table roleC" data-select="@item.RoleId">
+                        @item.RoleName
+                    </td>
+                    <td class="padding-table">
+                        @*<select name="mySelect" class="mySelect" >
+                                <option value="4">Admin</option>
+                                <option value="5">Boss</option>
+                                <option value="6">User</option>
+                            </select>*@
+                        <a href="#" onclick="UpdateRole(this);" class="button update">Изменить роль</a>
+                        <a href="#" onclick="SaveRole(this);" class="button save" style="display:none">Сохранить</a>
+                    </td>
+                    <td class="padding-table">
+                        <a href="#" onclick="DeleteUser(this);" class="button">Удалить</a>
+                    </td>
+                </tr>
+                i = i + 1;
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<style>
+    .padding-table {
+        padding: 10px;
+    }
+
+    .button {
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 3px;
+        color: black;
+        display: block;
+    }
+
+    a .button :hover {
+        border: 2px solid black;
+        border-radius: 5px;
+        padding: 3px;
+        color: black;
+        display: block;
+    }
+</style>
+<script type="text/javascript">
+    
+    function UpdateRole(button) {
+        var roleId = $(button).parent().siblings(".roleC").attr("data-select");     
+        var level = $(button).parent().parent().attr("data-level");
+        var myId = $(button).parent().parent().attr("data-myId");
+        var userId = $(button).parent().parent().attr("data-userid");
+        if (myId == userId)
+        { alert('Нельзя изменить собственные данные')}
+        else
+            {
+        $(button).parent().siblings(".roleC").empty();
+        $(button).parent().siblings(".roleC").append('<div><select name="mySelect" class="mySelect"><option value="4">Admin</option><option value="5">Boss</option><option value="6">User</option></select></div>');
+        $(button).siblings(".save").show();
+        $(button).hide();
+        }
+    }
+
+    function SaveRole(button) {
+        var newRoleId = $(button).parent().siblings(".roleC").find(".mySelect").val();
+        var newRoleName = $(button).parent().siblings(".roleC").find(".mySelect option:selected").text();
+        var userId = $(button).parent().parent().attr("data-userid");      
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '@Url.Action("saveRole", "Admin")',
+                data: { "newRoleId": newRoleId, "userId": userId },
+                success: function (data) {
+                    if (data == 0) {
+                        $(button).siblings(".update").show();
+                        $(button).hide();
+                        $(button).parent().siblings(".roleC").empty();
+                        $(button).parent().siblings(".roleC").text(newRoleName);
+                        alert("Сохранено");
+                    }
+                    else
+                        alert("Ошибка");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Не удалось получить данные.');
+                }
+            });      
+    }
+    function DeleteUser(button) {
+        var userId = $(button).parent().parent().attr("data-userid");
+        var myId = $(button).parent().parent().attr("data-myId");
+        if (myId == userId)
+        { alert('Нельзя изменить собственные данные') }
+        else
+        {
+        $.ajax({
+            cache: false,
+            type: "GET",
+            url: '@Url.Action("deleteUser", "Admin")',
+            data: {"userId": userId },
+            success: function (data) {
+                if (data == 0) {
+                    $(button).parent().parent().remove();
+                    alert("Удалено");
+                }
+                else
+                    alert("Ошибка");
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Не удалось получить данные.');
+            }
+        });
+        }
+    }
+
+</script>
