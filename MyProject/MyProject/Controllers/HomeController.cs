@@ -8,23 +8,22 @@ namespace MyProject.Controllers
 {
     public class HomeController : Controller
     {
+        public object DT { get; private set; }
+
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            UserModel AdminList = new UserModel();
+            using (Models.DataClassesDataContext DT = new Models.DataClassesDataContext())
+            {
+                AdminList.userList = DT.UserRoleView.Select(s => new UserList1
+                {
+                    Email = s.Email,
+                    UserId = s.UserId
+                }).ToList();
+                AdminList.myId = Session["userId"].ToString();
+            }
+            return View(AdminList);
         }
     }
+
 }
